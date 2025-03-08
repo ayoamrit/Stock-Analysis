@@ -11,7 +11,6 @@ async function fetchStockFinancials(symbol){
         
     }catch(error){
         console.log(error.message);
-        console.error(error.message);
     }
 }
 
