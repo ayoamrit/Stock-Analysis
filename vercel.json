@@ -5,7 +5,7 @@
     ],
     "routes": [
       { "src": "/api/alphaVantage/stock", "dest": "api/alphaVantage/stock.js"},
-      { "src": "/(script\\.js|styles\\.css)", "dest": "/public/$1" },
+      { "src": "/(script\\.js|styles\\.css|table\\.js)", "dest": "/public/$1" },
       { "src": "/(.*)", "dest": "public/index.html" }
     ]
 }
