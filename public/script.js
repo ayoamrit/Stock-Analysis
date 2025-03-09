@@ -1,5 +1,3 @@
-import { showTable } from "./table";
-
 /**
  * Root
  */
