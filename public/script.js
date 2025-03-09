@@ -1,4 +1,4 @@
-import { getBalanceSheetTable } from "/utils/table.js";
+import { getBalanceSheetTable } from "../api/utils/table.js";
 
 /**
  * Root
