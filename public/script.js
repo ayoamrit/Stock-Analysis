@@ -1,8 +1,9 @@
-import { getBalanceSheetTable } from "./utils/table.js";
+import { getBalanceSheetTable } from "/utils/table.js";
 
 /**
  * Root
  */
+console.log("before root");
 const root = document.getElementById("root");
 const balanceSheetKeys = {
     "Cash & Short Term Investments": "cashAndShortTermInvestments",

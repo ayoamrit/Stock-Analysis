@@ -1,4 +1,3 @@
-
 function getBalanceSheetTable(annualReport, financialKeys){
 
     const table = document.createElement("table");
