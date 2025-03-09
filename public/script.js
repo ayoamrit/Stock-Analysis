@@ -59,7 +59,7 @@ function getBalanceSheetTable(annualReport, reportType){
         annualReport.forEach(report => {
             const td = document.createElement("td");
             td.textContent = report[key];
-            row.appendChil(td);
+            row.appendChild(td);
         });
 
         tableBody.appendChild(row);
