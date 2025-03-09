@@ -1,4 +1,4 @@
-export default function getBalanceSheetTable(annualReport, financialKeys){
+export function getBalanceSheetTable(annualReport, financialKeys){
 
     const table = document.createElement("table");
     const tableHead = document.createElement("thead");
