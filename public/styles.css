@@ -35,6 +35,10 @@ table {
     font-size: 1.6rem;
 }
 
+tr{
+    width: 50px;
+    height: 30px;
+}
 th, td {
     border: 1px solid #ddd;
     padding: 8px 12px;
