@@ -43,13 +43,15 @@ th, td {
 }
 
 th {
+    width: 150px;
+    height: 40px;
     background-color: var(--color-darkblack);
     color: var(--color-white);
     text-align: center;
 }
 
 td {
-    width: 80px;
+    width: 120px;
     height: 40px;
     text-align: left;
     color: var(--color-white);
