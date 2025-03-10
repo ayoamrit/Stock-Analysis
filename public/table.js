@@ -1,3 +1,16 @@
+function formatNumber(value) {
+    if (!value || isNaN(value)) return "-"; // Handle missing or invalid values
+
+    const num = parseFloat(value);
+
+    if (num >= 1_000_000_000) {
+        return (num / 1_000_000_000).toFixed(2) + "B"; // Convert to billions (B)
+    } else if (num >= 1_000_000) {
+        return (num / 1_000_000).toFixed(2) + "M"; // Convert to millions (M)
+    }
+    return num.toLocaleString(); // Keep smaller numbers readable with commas
+}
+
 export function getBalanceSheetTable(annualReport, financialKeys){
 
     const table = document.createElement("table");
@@ -33,7 +46,7 @@ export function getBalanceSheetTable(annualReport, financialKeys){
 
         annualReport.forEach(report => {
             const td = document.createElement("td");
-            td.textContent = report[key];
+            td.textContent = formatNumber(report[key]);
             row.appendChild(td);
         });
 
