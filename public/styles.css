@@ -1,15 +1,37 @@
+
+:root{
+    --color-lightgrey: #333333;
+    --color-darkblack: #141614;
+    --color-white: white;
+}
+
+/* Global Styles
+-----------------------------------------------------------*/
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-body{
-    background-color: yellow;
+
+html{
+    font-family: 'Poppins', sans-serif;
+    font-size: 62.5%; /* Set the default size to 10px*/
+    user-select: none;
 }
-table {
+
+body, html{
     width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: var(--color-lightgrey);
+}
+
+table {
+    width: 80%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: 20px auto;
+    overflow-x: scroll;
+    border-radius: 5px;
 }
 
 th, td {
@@ -19,19 +41,22 @@ th, td {
 }
 
 th {
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--color-darkblack);
+    color: var(--color-white);
     text-align: center;
 }
 
 td {
     text-align: left;
+    color: var(--color-white);
 }
 
 table tr:nth-child(even) {
     background-color: #f2f2f2;
+    color: var(--color-darkblack);
 }
 
 table tr:hover {
     background-color: #ddd;
+    color: var(--color-darkblack);
 }
