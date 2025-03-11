@@ -11,7 +11,13 @@ function formatNumber(value) {
     return num.toLocaleString(); // Keep smaller numbers readable with commas
 }
 
-export function getBalanceSheetTable(annualReport, financialKeys){
+
+export function getTableContainer(annualReport, financialKeys){
+
+    //Table container => div
+    const tableContainer = document.createElement("div");
+    tableContainer.classList.add("table-container");
+
 
     const table = document.createElement("table");
     const tableHead = document.createElement("thead");
@@ -54,5 +60,6 @@ export function getBalanceSheetTable(annualReport, financialKeys){
     })
 
     table.appendChild(tableBody);
-    return table;
+    tableContainer.append(table);
+    return tableContainer;
 }

@@ -1,4 +1,4 @@
-import {getBalanceSheetTable} from "./table.js";
+import {getTableContainer} from "./table.js";
 /**
  * Root
  */
@@ -25,7 +25,7 @@ async function fetchStockFinancials(symbol){
         console.log(data);
         
         if(data.balanceSheet && data.balanceSheet.annualReports){
-            const balanceSheetTable = getBalanceSheetTable(data.balanceSheet.annualReports, balanceSheetKeys);
+            const balanceSheetTable = getTableContainer(data.balanceSheet.annualReports, balanceSheetKeys);
             root.appendChild(balanceSheetTable);
         }
     }catch(error){

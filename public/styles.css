@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-:root{
-    --color-lightgrey: #333333;
-    --color-darkblack: #141614;
-    --color-white: white;
-}
 
 /* Global Styles
 -----------------------------------------------------------*/
@@ -27,36 +22,72 @@ body, html{
     background-color: var(--color-lightgrey);
 }
 
-table {
-    width: 80%;
-    border-collapse: collapse;
+.table-container {
+    max-width: 80%;
     margin: 20px auto;
-    overflow-x: scroll;
-    border-radius: 5px;
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+/* Header Styling */
+thead {
+    background-color: #2c3e50;
+    color: white;
+}
+
+thead th {
+    padding: 12px;
+    text-align: left;
     font-size: 1.6rem;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 120px; /* Ensuring equal column widths */
 }
 
-th, td {
+/* Alternating row colors */
+tbody tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+tbody th, tbody td {
+    padding: 10px;
     border: 1px solid #ddd;
-    padding: 8px 12px;
     text-align: left;
+    min-width: 120px;
+    font-size: 14px;
 }
 
-th {
-    width: 150px;
-    height: 40px;
-    background-color: var(--color-darkblack);
-    color: var(--color-white);
-    text-align: center;
+/* Fix the first column */
+tbody th {
+    position: sticky;
+    left: 0;
+    background-color: #34495e;
+    color: white;
+    font-weight: bold;
 }
 
-td {
-    width: 120px;
-    height: 40px;
-    text-align: left;
-    color: var(--color-white);
+/* Add smooth scrolling */
+.table-container::-webkit-scrollbar {
+    height: 8px;
 }
 
-table tr:nth-child(even) {
-    background-color: #2b2929;
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background-color: #eee;
 }
