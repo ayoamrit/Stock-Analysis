@@ -50,6 +50,7 @@ thead th {
     font-weight: bold;
     border: 1px solid rgba(255, 255, 255, 0.2);
     min-width: 120px; /* Ensuring equal column widths */
+    white-space: nowrap;
 }
 
 /* Alternating row colors */
@@ -69,6 +70,17 @@ tbody th, tbody td {
     font-size: 14px;
 }
 
+.sticky-first-col {
+    position: sticky;
+    left: 0;
+    background-color: #34495e;
+    color: white;
+    z-index: 3; /* Ensures it stays on top of other headers */
+    white-space: nowrap; /* Ensures it stays in one line */
+    font-weight: bold;
+    border-right: 1px solid #ddd;
+}
+
 /* Fix the first column */
 tbody th {
     position: sticky;
@@ -76,6 +88,8 @@ tbody th {
     background-color: #34495e;
     color: white;
     font-weight: bold;
+    white-space: nowrap;
+    z-index: 2;
 }
 
 /* Add smooth scrolling */

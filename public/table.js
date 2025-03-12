@@ -29,6 +29,7 @@ export function getTableContainer(annualReport, financialKeys){
     //Header row
     const headRow = document.createElement("tr");
     const firstTh = document.createElement("th");
+    firstTh.classList.add("sticky-first-col");
     firstTh.textContent = "Financial Metric";
     headRow.appendChild(firstTh);
 
