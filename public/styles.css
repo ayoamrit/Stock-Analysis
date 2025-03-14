@@ -46,10 +46,10 @@ thead {
 thead th {
     padding: 12px;
     text-align: left;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: bold;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    min-width: 120px; /* Ensuring equal column widths */
+    min-width: 120px;
     white-space: nowrap;
 }
 
@@ -67,7 +67,7 @@ tbody th, tbody td {
     border: 1px solid #ddd;
     text-align: left;
     min-width: 120px;
-    font-size: 14px;
+    font-size: 1.2rem;
 }
 
 .sticky-first-col {
@@ -75,8 +75,8 @@ tbody th, tbody td {
     left: 0;
     background-color: #34495e;
     color: white;
-    z-index: 3; /* Ensures it stays on top of other headers */
-    white-space: nowrap; /* Ensures it stays in one line */
+    z-index: 3;
+    white-space: nowrap; 
     font-weight: bold;
     border-right: 1px solid #ddd;
 }
