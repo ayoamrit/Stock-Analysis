@@ -22,6 +22,26 @@ body, html{
     background-color: var(--color-lightgrey);
 }
 
+h1, h2, h3{
+    font-weight: 400;
+}
+
+h1{
+    font-size: 7rem;
+}
+h2{
+    font-size: 3.6rem;
+}
+h3{
+    font-size: 2.4rem;
+}
+p{
+    font-size: 1.4rem;
+}
+
+
+/* Table Styles
+-----------------------------------------------------------*/
 .table-container {
     max-width: 80%;
     margin: 20px auto;
@@ -29,6 +49,15 @@ body, html{
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     background: white;
+}
+
+.table-header{
+    text-align: left;
+    padding: 0 16px;
+}
+
+.table-header h2{
+    font-weight: 600;
 }
 
 table {
@@ -65,9 +94,12 @@ tbody tr:nth-child(odd) {
 tbody th, tbody td {
     padding: 10px;
     border: 1px solid #ddd;
-    text-align: left;
     min-width: 120px;
     font-size: 1.2rem;
+}
+
+tbody td{
+    text-align: right;
 }
 
 .sticky-first-col {

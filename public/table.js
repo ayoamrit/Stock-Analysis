@@ -4,8 +4,9 @@
  * @param {Object} financialKeys - Object mapping financial metric labels to report keys.
  * @returns {HTMLElement} - A table container element with the formatted financial data.
  */
-export function getTable(annualReport, keyType){
+export function getTable(annualReport, keyType, title, description){
     const tableContainer = createTableContainer();
+    const tableContainerHeader = createTableContainerHeader(title, description);
     const table = document.createElement("table");
 
     //Extract years from the financial data
@@ -18,6 +19,7 @@ export function getTable(annualReport, keyType){
     table.appendChild(createTableHeader(years));
     table.appendChild(createTableBody(annualReport, financialKeys));
 
+    tableContainer.appendChild(tableContainerHeader);
     tableContainer.appendChild(table);
     return tableContainer;
 }
@@ -29,6 +31,32 @@ function createTableContainer(){
     const tableContainer = document.createElement("div");
     tableContainer.classList.add("table-container");
     return tableContainer;
+}
+
+/**
+ * Creates a header section for the fiancial data table
+ * Includes a title and edscription to provide context for the displayed data
+ * @param {string} title - The main heading for the table section 
+ * @param {string} description - A brief explanation of the table content 
+ * @returns {HTMLElement} - A div element containing the title and description
+ */
+function createTableContainerHeader(title, description){
+
+    //Create a div container for the table header
+    const div = document.createElement("div");
+    div.classList.add("table-header");
+
+    //Create and append title (h2 element);
+    const h2 = document.createElement("h2");
+    h2.textContent = title;
+    div.appendChild(h2);
+
+    //Create and append description (p element)
+    const p = document.createElement("p");
+    p.textContent = description;
+    div.appendChild(p);
+
+    return div;
 }
 
 /**
@@ -129,7 +157,12 @@ function formatNumber(number){
     const num = parseFloat(number);
     const absNum = Math.abs(num);
 
-    return (number < 0 ? "-" : "") + (absNum/1_000_000).toFixed(2);
+    const formattedNumber = (absNum/1_000_000).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    });
+
+    return (number < 0 ? "-$" : "$") + formattedNumber;
 }
 
 
