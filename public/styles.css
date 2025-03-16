@@ -42,22 +42,22 @@ p{
 
 /* Table Styles
 -----------------------------------------------------------*/
-.table-container {
+.table-section{
     max-width: 80%;
     margin: 40px auto;
+}
+
+.table-container {
+    width: 100%;
     overflow-x: auto;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     background: white;
-    position: relative;
 }
 
 .table-header{
     text-align: left;
     padding: 16px 0 10px 10px;
-    position: sticky;
-    top: 0;
-    z-index: 2;
     width: 100%;
     display: block;
 }

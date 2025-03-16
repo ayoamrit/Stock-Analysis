@@ -5,8 +5,8 @@
  * @returns {HTMLElement} - A table container element with the formatted financial data.
  */
 export function getTable(annualReport, keyType, title, description){
+    const tableSection = createTableSection();
     const tableContainer = createTableContainer();
-    const tableContainerHeader = createTableContainerHeader(title, description);
     const table = document.createElement("table");
 
     //Extract years from the financial data
@@ -19,18 +19,24 @@ export function getTable(annualReport, keyType, title, description){
     table.appendChild(createTableHeader(years));
     table.appendChild(createTableBody(annualReport, financialKeys));
 
-    tableContainer.appendChild(tableContainerHeader);
     tableContainer.appendChild(table);
-    return tableContainer;
+    tableSection.appendChild(tableContainer);
+
+    return tableSection;
 }
 
 /**
- * Create and returns the table container element
+ * Creates a section element that wraps a table
+ * The section is assigned a role for accessibility and a CSS class for styling
+ * @returns {HTMLElement} - The created section element containing the table header
  */
-function createTableContainer(){
-    const tableContainer = document.createElement("div");
-    tableContainer.classList.add("table-container");
-    return tableContainer;
+function createTableSection(){
+    const section = document.createElement("section");
+    section.setAttribute("role", "region");
+    section.classList.add("table-section");
+    section.appendChild(createTableSectionHeader(title, description));
+
+    return section;
 }
 
 /**
@@ -40,7 +46,7 @@ function createTableContainer(){
  * @param {string} description - A brief explanation of the table content 
  * @returns {HTMLElement} - A div element containing the title and description
  */
-function createTableContainerHeader(title, description){
+function createTableSectionHeader(title, description){
 
     //Create a div container for the table header
     const div = document.createElement("div");
@@ -57,6 +63,16 @@ function createTableContainerHeader(title, description){
     div.appendChild(p);
 
     return div;
+}
+
+
+/**
+ * Create and returns the table container element
+ */
+function createTableContainer(){
+    const tableContainer = document.createElement("div");
+    tableContainer.classList.add("table-container");
+    return tableContainer;
 }
 
 /**
