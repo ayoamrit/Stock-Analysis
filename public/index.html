@@ -6,9 +6,34 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Analyze the historial data of various stocks easily with the use of AI">
         <link rel="stylesheet" href="styles.css">
-        
     </head>
     <body>
+        <main>
+            <!--Title Section-->
+            <section class="hero-section">
+                <h2 class="page-title"><span class="highlight-text">Search</span> Stock Data</h2>
+                <p class="hero-description">Get historical financial data for any stock fast, accurate, and with minimal effort on your part.</p>
+            </section>
+
+            <!--Search Bar-->
+            <div class="stock-search-bar">
+                <div class="search-input-container">
+                  <input id="stock-symbol-input" type="text" placeholder="Enter ticker symbol..."/>
+                  <button class="search-button" id="search-button">Search</button>
+                </div>
+            </div>
+        
+              <!--Trending Search Searches-->
+              <section class="trending-container">
+                <p>Trending Searches</p>
+                <span class="cursor-pointer trending-stock-item">AAPL</span>
+                <span class="cursor-pointer trending-stock-item">MSFT</span>
+                <span class="cursor-pointer trending-stock-item">TSLA</span>
+                <span class="cursor-pointer trending-stock-item">NVDA</span>
+                <span class="cursor-pointer trending-stock-item">IBM</span>
+              </section>
+        </main>
+
         <div id="root"></div>
     </body>
     
