@@ -5,7 +5,7 @@
  * @returns {HTMLElement} - A table container element with the formatted financial data.
  */
 export function getTable(annualReport, keyType, title, description){
-    const tableSection = createTableSection();
+    const tableSection = createTableSection(title, description);
     const tableContainer = createTableContainer();
     const table = document.createElement("table");
 
@@ -30,7 +30,7 @@ export function getTable(annualReport, keyType, title, description){
  * The section is assigned a role for accessibility and a CSS class for styling
  * @returns {HTMLElement} - The created section element containing the table header
  */
-function createTableSection(){
+function createTableSection(title, description){
     const section = document.createElement("section");
     section.setAttribute("role", "region");
     section.classList.add("table-section");
