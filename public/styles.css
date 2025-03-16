@@ -29,20 +29,27 @@ h1, h2, h3{
 h1{
     font-size: 7rem;
 }
+
 h2{
     font-size: 3.6rem;
 }
+
 h3{
     font-size: 2.4rem;
 }
+
 p{
     font-size: 1.4rem;
+}
+
+.cursor-pointer{
+    cursor: pointer;
 }
 
 /* Main Styles
 -----------------------------------------------------------*/
 main {
-    max-width: 80%;
+    max-width: 60%;
     margin: 40px auto;
     text-align: center;
     color: black;
@@ -55,6 +62,7 @@ main {
 .highlight-text{
     background-color: #2c3e50;
     color: white;
+    padding: 0 5px;
 }
 
 .stock-search-bar{
@@ -71,11 +79,12 @@ main {
     height: 50px;
     font-size: 1.4rem;
     margin-top: 20px;
+    border: none;
 }
 
 #stock-symbol-input{
     width: 80%;
-    background-color: #888;
+    background-color: #ebe9e9;
     border-radius: 5px 0 0 5px;
     box-sizing: border-box;
     padding: 5px;
@@ -87,7 +96,6 @@ main {
     height: 50px;
     background-color: #2c3e50;
     color: white;
-    border: none;
     border-radius: 0 5px 5px 0;
 }
 
