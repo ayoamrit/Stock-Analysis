@@ -145,7 +145,7 @@ export function getTable(annualReport, keyType){
 
     tableContainer.appendChild(table);
 
-    return tableSection;
+    return tableContainer;
 }
 
 
