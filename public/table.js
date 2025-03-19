@@ -10,7 +10,7 @@ export function getCompanyHeader(companyData){
     heading.textContent = companyData.Name;
 
     const description = document.createElement("p");
-    description.textContent = companyData.description;
+    description.textContent = companyData.Description;
 
     container.appendChild(heading);
     container.appendChild(description);
