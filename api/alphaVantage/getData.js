@@ -36,7 +36,7 @@ async function fetchFinancialData(tickerSymbol, functionType){
  * @returns {Promise<Object>} - All financial statements
  */
 async function getStockFinancials(tickerSymbol){
-    const [incomeStatement, balanceSheet, cashFlowStatement] = await Promise.all([
+    const [incomeStatement, balanceSheet, cashFlowStatement, overview] = await Promise.all([
         fetchFinancialData(tickerSymbol, "INCOME_STATEMENT"),
         fetchFinancialData(tickerSymbol, "BALANCE_SHEET"),
         fetchFinancialData(tickerSymbol, "CASH_FLOW"),
