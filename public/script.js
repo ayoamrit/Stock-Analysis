@@ -1,8 +1,16 @@
-import {getTable} from "./table.js";
+import {getTable, getCompanyHeader, getCompanyOverview, getButtons} from "./table.js";
 /**
  * Root
  */
 const root = document.getElementById("root");
+
+/**
+ * Nav GitHub link
+ * 
+ */
+document.querySelector("nav").addEventListener("click", function() {
+    window.open("https://github.com/ayoamrit/Stock-Analysis", "_blank");
+});
 
 
 /**
@@ -21,29 +29,21 @@ async function fetchStockFinancials(symbol){
         //Remove everything from the root element before inserting
         root.innerHTML = "";
 
+        const companyHeader = getCompanyHeader(data.overview);
+        const companyOverview = getCompanyOverview(data.overview);
+        const tableButtons = getButtons();
+
+        root.appendChild(companyHeader);
+        root.appendChild(companyOverview);
+        root.appendChild(tableButtons);
+
         //Append Balance Sheet Table if data exists
         if(data.balanceSheet && data.balanceSheet.annualReports){
-            const title = "Balance Sheet";
-            const description = `The balance sheet provides a snapshot of the company’s financial position, showing assets, liabilities, and equity over time.`;
-            const balanceSheetTable = getTable(data.balanceSheet.annualReports, "balanceSheet", title, description);
+            
+            const balanceSheetTable = getTable(data.balanceSheet.annualReports, "balanceSheet");
             root.appendChild(balanceSheetTable);
         }
 
-        //Append Cash Flow Statement if data exists
-        if(data.cashFlowStatement && data.cashFlowStatement.annualReports){
-            const title = "Cash Flow Statement";
-            const description = "This statement tracks the cash inflows and outflows from operating, investing, and financing activities, reflecting the company’s liquidity and cash management.";
-            const cashFlowStatementTable = getTable(data.cashFlowStatement.annualReports, "cashFlowStatement", title, description);
-            root.appendChild(cashFlowStatementTable);
-        }
-
-        //Append Income Statement if data exists
-        if(data.incomeStatement && data.incomeStatement.annualReports){
-            const title = "Income Statement";
-            const description = "The income statement outlines revenue, expenses, and net income over a period, helping assess profitability and financial performance.";
-            const incomeStatementTable = getTable(data.incomeStatement.annualReports, "incomeStatement", title, description);
-            root.appendChild(incomeStatementTable);
-        }
     }catch(error){
         console.log(error);
     }

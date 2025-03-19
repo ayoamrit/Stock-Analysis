@@ -1,11 +1,125 @@
+/*
+ ***************************************************************
+ * Company Header 
+*/
+export function getCompanyHeader(companyData){
+    return `
+        <div class="company-header-container">
+            <h2>${companyData.Name} | ${companyData.Symbol}</h2>
+            <p>${companyData.Description}</p>
+        </div>
+    `;
+}
+
+/*
+ ***************************************************************
+ * Company Overview 
+*/
+export function getCompanyOverview(companyData){
+    return `
+        <div class="company-overview-container">
+            <div class="company-content-wrapper">
+                <div class="company-content">
+                    <p>Sector</p>
+                    <p>${companyData.Sector}</p>
+                </div>
+                <div class="company-content">
+                    <p>PE Ratio</p>
+                    <p>${companyData.PERatio}</p>
+                </div>
+                <div class="company-content">
+                    <p>PEGRatio</p>
+                    <p>${companyData.PEGRatio}</p>
+                </div>
+                <div class="company-content">
+                    <p>Book Value</p>
+                    <p>${companyData.BookValue}</p>
+                </div>
+            </div>
+
+            <div class="company-content-wrapper">
+                <div class="company-content">
+                    <p>Dividend/Share</p>
+                    <p>${companyData.DividendPerShare}</p>
+                </div>
+                <div class="company-content">
+                    <p>Dividend Yield</p>
+                    <p>${companyData.DividendYield}</p>
+                </div>
+                <div class="company-content">
+                    <p>EPS</p>
+                    <p>${companyData.EPS}</p>
+                </div>
+                <div class="company-content">
+                    <p>Revenue/Share</p>
+                    <p>${companyData.RevenuePerShareTTM}</p>
+                </div>
+            </div>
+
+            <div class="company-content-wrapper">
+                <div class="company-content">
+                    <p>Profit Margin</p>
+                    <p>${companyData.ProfitMargin}</p>
+                </div>
+                <div class="company-content">
+                    <p>Operating Margin</p>
+                    <p>${companyData.OperatingMarginTTM}</p>
+                </div>
+                <div class="company-content">
+                    <p>ROA</p>
+                    <p>${companyData.ReturnOnAssetsTTM}</p>
+                </div>
+                <div class="company-content">
+                    <p>ROE</p>
+                    <p>${companyData.ReturnOnEquityTTM}</p>
+                </div>
+            </div>
+
+            <div class="company-content-wrapper">
+                <div class="company-content">
+                    <p>Trailing PE</p>
+                    <p>${companyData.TrailingPE}</p>
+                </div>
+                <div class="company-content">
+                    <p>Forward PE</p>
+                    <p>${companyData.ForwardPE}</p>
+                </div>
+                <div class="company-content">
+                    <p>Price-to-Sale</p>
+                    <p>${companyData.PriceToSalesRatioTTM}</p>
+                </div>
+                <div class="company-content">
+                    <p>Price-to-Book</p>
+                    <p>${companyData.PriceToBookRatio}</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+
+/*
+ ***************************************************************
+ * Company Table Buttons
+*/
+export function getButtons(){
+    return `
+        <div class="table-buttons">
+            <button class="active" id="balance-sheet-button">Balance Sheet</button>
+            <button id="cash-flow-statement-button>Cash Flow Statement</button>
+            <button id="income-statement-button">Income Statement</button>
+        </div>
+    `;
+}
+
+
 /**
  * Generate an HTML table displaying fiancial data.
  * @param {Array} annualReport - Array of financial data Objects
  * @param {Object} financialKeys - Object mapping financial metric labels to report keys.
  * @returns {HTMLElement} - A table container element with the formatted financial data.
  */
-export function getTable(annualReport, keyType, title, description){
-    const tableSection = createTableSection(title, description);
+export function getTable(annualReport, keyType){
     const tableContainer = createTableContainer();
     const table = document.createElement("table");
 
@@ -20,49 +134,8 @@ export function getTable(annualReport, keyType, title, description){
     table.appendChild(createTableBody(annualReport, financialKeys));
 
     tableContainer.appendChild(table);
-    tableSection.appendChild(tableContainer);
 
     return tableSection;
-}
-
-/**
- * Creates a section element that wraps a table
- * The section is assigned a role for accessibility and a CSS class for styling
- * @returns {HTMLElement} - The created section element containing the table header
- */
-function createTableSection(title, description){
-    const section = document.createElement("section");
-    section.setAttribute("role", "region");
-    section.classList.add("table-section");
-    section.appendChild(createTableSectionHeader(title, description));
-
-    return section;
-}
-
-/**
- * Creates a header section for the fiancial data table
- * Includes a title and edscription to provide context for the displayed data
- * @param {string} title - The main heading for the table section 
- * @param {string} description - A brief explanation of the table content 
- * @returns {HTMLElement} - A div element containing the title and description
- */
-function createTableSectionHeader(title, description){
-
-    //Create a div container for the table header
-    const div = document.createElement("div");
-    div.classList.add("table-header");
-
-    //Create and append title (h2 element);
-    const h2 = document.createElement("h2");
-    h2.textContent = title;
-    div.appendChild(h2);
-
-    //Create and append description (p element)
-    const p = document.createElement("p");
-    p.textContent = description;
-    div.appendChild(p);
-
-    return div;
 }
 
 

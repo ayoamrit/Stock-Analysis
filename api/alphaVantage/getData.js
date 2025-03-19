@@ -1,8 +1,10 @@
 const API_KEY = process.env.API_KEY;
 const BASE_URL = "https://www.alphavantage.co/query";
-// const INCOME_STATEMENT_URL = "https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=IBM&apikey=demo";
-// const BALANCE_SHEET_URL = "https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=IBM&apikey=demo";
-// const CASH_FLOW_STATEMENT_URL = "https://www.alphavantage.co/query?function=CASH_FLOW&symbol=IBM&apikey=demo";
+
+// Company_Overview_URL = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo";
+// INCOME_STATEMENT_URL = "https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=IBM&apikey=demo";
+// BALANCE_SHEET_URL = "https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=IBM&apikey=demo";
+// CASH_FLOW_STATEMENT_URL = "https://www.alphavantage.co/query?function=CASH_FLOW&symbol=IBM&apikey=demo";
 
 
 /**
@@ -37,10 +39,11 @@ async function getStockFinancials(tickerSymbol){
     const [incomeStatement, balanceSheet, cashFlowStatement] = await Promise.all([
         fetchFinancialData(tickerSymbol, "INCOME_STATEMENT"),
         fetchFinancialData(tickerSymbol, "BALANCE_SHEET"),
-        fetchFinancialData(tickerSymbol, "CASH_FLOW")
+        fetchFinancialData(tickerSymbol, "CASH_FLOW"),
+        fetchFinancialData(tickerSymbol, "OVERVIEW")
     ]);
 
-    return {incomeStatement, balanceSheet, cashFlowStatement};
+    return {incomeStatement, balanceSheet, cashFlowStatement, overview};
 }
 
 export {getStockFinancials};
