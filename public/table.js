@@ -3,12 +3,19 @@
  * Company Header 
 */
 export function getCompanyHeader(companyData){
-    return `
-        <div class="company-header-container">
-            <h2>${companyData.Name} | ${companyData.Symbol}</h2>
-            <p>${companyData.Description}</p>
-        </div>
-    `;
+    const container = document.createElement("div");
+    container.classList.add("company-header-container");
+
+    const heading = document.createElement("h2");
+    heading.textContent = companyData.Name;
+
+    const description = document.createElement("p");
+    description.textContent = companyData.description;
+
+    container.appendChild(heading);
+    container.appendChild(description);
+
+    return container;
 }
 
 /*
@@ -16,85 +23,70 @@ export function getCompanyHeader(companyData){
  * Company Overview 
 */
 export function getCompanyOverview(companyData){
-    return `
-        <div class="company-overview-container">
-            <div class="company-content-wrapper">
-                <div class="company-content">
-                    <p>Sector</p>
-                    <p>${companyData.Sector}</p>
-                </div>
-                <div class="company-content">
-                    <p>PE Ratio</p>
-                    <p>${companyData.PERatio}</p>
-                </div>
-                <div class="company-content">
-                    <p>PEGRatio</p>
-                    <p>${companyData.PEGRatio}</p>
-                </div>
-                <div class="company-content">
-                    <p>Book Value</p>
-                    <p>${companyData.BookValue}</p>
-                </div>
-            </div>
 
-            <div class="company-content-wrapper">
-                <div class="company-content">
-                    <p>Dividend/Share</p>
-                    <p>${companyData.DividendPerShare}</p>
-                </div>
-                <div class="company-content">
-                    <p>Dividend Yield</p>
-                    <p>${companyData.DividendYield}</p>
-                </div>
-                <div class="company-content">
-                    <p>EPS</p>
-                    <p>${companyData.EPS}</p>
-                </div>
-                <div class="company-content">
-                    <p>Revenue/Share</p>
-                    <p>${companyData.RevenuePerShareTTM}</p>
-                </div>
-            </div>
+    const overviewContainer = document.createElement("div");
+    overviewContainer.classList.add("company-overview-container");
 
-            <div class="company-content-wrapper">
-                <div class="company-content">
-                    <p>Profit Margin</p>
-                    <p>${companyData.ProfitMargin}</p>
-                </div>
-                <div class="company-content">
-                    <p>Operating Margin</p>
-                    <p>${companyData.OperatingMarginTTM}</p>
-                </div>
-                <div class="company-content">
-                    <p>ROA</p>
-                    <p>${companyData.ReturnOnAssetsTTM}</p>
-                </div>
-                <div class="company-content">
-                    <p>ROE</p>
-                    <p>${companyData.ReturnOnEquityTTM}</p>
-                </div>
-            </div>
+    //Function to insert individual divs inside contentWrappers
+    const createContent = (label, value) => {
+        const content = document.createElement("div");
+        content.classList.add("company-content");
 
-            <div class="company-content-wrapper">
-                <div class="company-content">
-                    <p>Trailing PE</p>
-                    <p>${companyData.TrailingPE}</p>
-                </div>
-                <div class="company-content">
-                    <p>Forward PE</p>
-                    <p>${companyData.ForwardPE}</p>
-                </div>
-                <div class="company-content">
-                    <p>Price-to-Sale</p>
-                    <p>${companyData.PriceToSalesRatioTTM}</p>
-                </div>
-                <div class="company-content">
-                    <p>Price-to-Book</p>
-                    <p>${companyData.PriceToBookRatio}</p>
-                </div>
-            </div>
-        </div>
-    `;
+        const labelElement = document.createElement("p");
+        labelElement.textContent = label;
+
+        const valueElement = document.createElement("p");
+        valueElement.textContent = value;
+
+        content.appendChild(labelElement);
+        content.appendChild(valueElement);
+
+        return content;
+    };
+
+    //1st Wrapper
+    const contentWrapper_1 = document.createElement("div");
+    contentWrapper_1.classList.add("company-content-wrapper");
+
+    contentWrapper_1.appendChild(createContent("Sector", companyData.Sector));
+    contentWrapper_1.appendChild(createContent('PE Ratio', companyData.PERatio));
+    contentWrapper_1.appendChild(createContent('PEGRatio', companyData.PEGRatio));
+    contentWrapper_1.appendChild(createContent('Book Value', companyData.BookValue));
+
+    //2nd Wrapper
+    const contentWrapper_2 = document.createElement("div");
+    contentWrapper_2.classList.add("company-content-wrapper");
+
+    contentWrapper_2.appendChild(createContent('Dividend/Share', companyData.DividendPerShare));
+    contentWrapper_2.appendChild(createContent('Dividend Yield', companyData.DividendYield));
+    contentWrapper_2.appendChild(createContent('EPS', companyData.EPS));
+    contentWrapper_2.appendChild(createContent('Revenue/Share', companyData.RevenuePerShareTTM));
+
+    //3rd Wrapper
+    const contentWrapper_3 = document.createElement("div");
+    contentWrapper_3.classList.add("company-content-wrapper");
+
+    contentWrapper_3.appendChild(createContent('Profit Margin', companyData.ProfitMargin));
+    contentWrapper_3.appendChild(createContent('Operating Margin', companyData.OperatingMarginTTM));
+    contentWrapper_3.appendChild(createContent('ROA', companyData.ReturnOnAssetsTTM));
+    contentWrapper_3.appendChild(createContent('ROE', companyData.ReturnOnEquityTTM));
+
+    //3rd Wrapper
+    const contentWrapper_4 = document.createElement("div");
+    contentWrapper_4.classList.add("company-content-wrapper");
+
+    contentWrapper_4.appendChild(createContent('Trailing PE', companyData.TrailingPE));
+    contentWrapper_4.appendChild(createContent('Forward PE', companyData.ForwardPE));
+    contentWrapper_4.appendChild(createContent('Price-to-Sale', companyData.PriceToSalesRatioTTM));
+    contentWrapper_4.appendChild(createContent('Price-to-Book', companyData.PriceToBookRatio));
+
+
+    overviewContainer.appendChild(contentWrapper_1);
+    overviewContainer.appendChild(contentWrapper_2);
+    overviewContainer.appendChild(contentWrapper_3);
+    overviewContainer.appendChild(contentWrapper_4);
+
+    return overviewContainer;
 }
 
 
@@ -103,13 +95,31 @@ export function getCompanyOverview(companyData){
  * Company Table Buttons
 */
 export function getButtons(){
-    return `
-        <div class="table-buttons">
-            <button class="active" id="balance-sheet-button">Balance Sheet</button>
-            <button id="cash-flow-statement-button>Cash Flow Statement</button>
-            <button id="income-statement-button">Income Statement</button>
-        </div>
-    `;
+    const container = document.createElement("div");
+    container.classList.add("buttons-container");
+
+    //Balance Sheet Button
+    const button_1 = document.createElement("button");
+    button_1.classList.add("active");
+    button_1.setAttribute("id", "balance-sheet-button");
+    button_1.textContent = "Balance Sheet";
+
+    //Cash Flow Statement Button
+    const button_2 = document.createElement("button");
+    button_2.setAttribute("id", "cash-flow-statement-button");
+    button_2.textContent = "Cash Flow Statement";
+
+    //Income Statement Button
+    const button_3 = document.createElement("button");
+    button_3.setAttribute("id", "income-statement-button");
+    button_3.textContent = "Income Statement";
+
+
+    container.appendChild(button_1);
+    container.appendChild(button_2);
+    container.appendChild(button_3);
+
+    return container;
 }
 
 
