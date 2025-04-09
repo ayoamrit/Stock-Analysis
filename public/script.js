@@ -8,6 +8,8 @@ document.querySelector("nav").addEventListener("click", function() {
 });
 
 
+
+const root = document.getElementById("root");
 /**
  * Fetch stock financial data from the backend API and generates financial tables
  * 
@@ -20,9 +22,6 @@ async function fetchStockFinancials(symbol){
         const response = await fetch(`/api/alphaVantage/stock?symbol=${symbol}`);
         const data = await response.json();
         console.log(data);
-        
-        
-        const root = document.getElementById("root");
 
         //Remove everything from the root element before inserting
         root.innerHTML = "";
@@ -84,6 +83,7 @@ function buttonAction(report, reportType){
 
     const table = getTable(report, reportType);
     tableContainer.appendChild(table);
+    root.appendChild(tableContainer);
 }
 
 
