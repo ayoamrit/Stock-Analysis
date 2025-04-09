@@ -79,11 +79,13 @@ function buttonAction(report, reportType){
     }
 
     const tableContainer = document.querySelector(".table-container");
-    tableContainer.innerHTML = "";
+
+    if(tableContainer){
+        root.removeChild(tableContainer);
+    }
 
     const table = getTable(report, reportType);
-    tableContainer.appendChild(table);
-    root.appendChild(tableContainer);
+    root.appendChild(table);
 }
 
 
