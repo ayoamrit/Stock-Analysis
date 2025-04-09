@@ -36,7 +36,7 @@ async function fetchStockFinancials(symbol){
 
         attachButtonListener(data);
 
-        balanceSheetButton.dispatchEvent(new Event("click"));
+        document.getElementById("balance-sheet-button").dispatchEvent(new Event("click"));
 
     }catch(error){
         console.log(error);
