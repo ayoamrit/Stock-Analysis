@@ -1,12 +1,7 @@
 import {getTable, getCompanyHeader, getCompanyOverview, getButtons} from "./table.js";
-/**
- * Root
- */
-const root = document.getElementById("root");
 
 /**
- * Nav GitHub link
- * 
+ * Nav GitHub link 
  */
 document.querySelector("nav").addEventListener("click", function() {
     window.open("https://github.com/ayoamrit/Stock-Analysis", "_blank");
@@ -26,6 +21,9 @@ async function fetchStockFinancials(symbol){
         const data = await response.json();
         console.log(data);
         
+        
+        const root = document.getElementById("root");
+
         //Remove everything from the root element before inserting
         root.innerHTML = "";
 
@@ -37,16 +35,55 @@ async function fetchStockFinancials(symbol){
         root.appendChild(companyOverview);
         root.appendChild(tableButtons);
 
-        //Append Balance Sheet Table if data exists
-        if(data.balanceSheet && data.balanceSheet.annualReports){
-            
-            const balanceSheetTable = getTable(data.balanceSheet.annualReports, "balanceSheet");
-            root.appendChild(balanceSheetTable);
-        }
+        attachButtonListener(data);
+
+        balanceSheetButton.dispatchEvent(new Event("click"));
 
     }catch(error){
         console.log(error);
     }
+}
+
+
+function attachButtonListener(data){
+    const balanceSheetButton = document.getElementById("balance-sheet-button");
+    const cashFlowStatementButton = document.getElementById("cash-flow-statement-button");
+    const incomeStatementButton = document.getElementById("income-statement-button");
+
+    balanceSheetButton.addEventListener("click", () => {
+        setActiveButton(balanceSheetButton);
+        buttonAction(data.balanceSheet.annualReports, "balanceSheet");
+    });
+
+    cashFlowStatementButton.addEventListener("click", () => {
+        setActiveButton(cashFlowStatementButton);
+        buttonAction(data.cashFlowStatement.annualReports, "cashFlowStatement");
+    });
+
+    incomeStatementButton.addEventListener("click", () => {
+        setActiveButton(incomeStatementButton);
+        buttonAction(data.incomeStatement.annualReports, "incomeStatement");
+    });
+}
+
+function setActiveButton(button){
+    document.querySelectorAll(".buttons-container button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+    button.classList.add("active");
+}
+
+function buttonAction(report, reportType){
+    if(!report || report.length === 0){
+        window.alert(`${report} data is missing or empty`);
+        return;
+    }
+
+    const tableContainer = document.querySelector(".table-container");
+    tableContainer.innerHTML = "";
+
+    const table = getTable(report, reportType);
+    tableContainer.appendChild(table);
 }
 
 
