@@ -5,13 +5,34 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Analyze the historial data of various stocks easily with the use of AI">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/loader.css">
     </head>
     <body>
         <!--Nav Section-->
         <nav>
             <p>View this project on GitHub</p>
         </nav>
+
+        <!--This container/wrapper will be removed once the user searched something-->
+        <section class="about-project-wrapper">
+            <p>
+                This web application allows users to effortlessly search and analyze historical stock data using real-time APIs. 
+                Built with HTML, CSS, and JavaScript for the frontend and Node.js for the backend, the project utilizes the 
+                AlphaVantage API to fetch stock data. It is currently hosted on <a href="https://vercel.com" target="_blank">Vercel</a> 
+                and version-controlled using <a href="https://github.com" target="_blank">GitHub</a>. Please note that the application 
+                is still under development, and due to the limitations of the free-tier AlphaVantage API, request frequency is restricted.
+            </p>
+            <div class="tech-stack">
+                <p style="background-color: #f16528;">HTML</p>
+                <p style="background-color: #29a8df;">CSS</p>
+                <p style="background-color: #89cf14;">JavaScript</p>
+                <p style="background-color: #75ba5a;">Node.js</p>
+                <p style="background-color: #606060;">AlphaVantage API</p>
+                <p style="background-color: white;">GitHub</p>
+                <p style="background-color: #897ea5;">Vercel</p>
+            </div>
+        </section>
 
         <!--Main Section-->
         <main>
@@ -30,9 +51,18 @@
             </div>
         </main>
 
-        <section id="root"></section>
+        <!--Loader-->
+        <div class="loader-wrapper">
+            <div class="loader hidden"></div>
+        </div>
+        
+
+        <!--Stock Data Section-->
+        <section id="root" role="region" aria-label="stock-data">
+            <div id="root-layout-wrapper"></div>
+        </section>
     </body>
     
     <!--Scripts-->
-    <script type="module" src="script.js"></script>
+    <script type="module" src="/js/script.js"></script>
 </html>

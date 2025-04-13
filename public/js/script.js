@@ -9,19 +9,42 @@ document.querySelector("nav").addEventListener("click", function() {
 
 
 
-const root = document.getElementById("root");
+const root = document.getElementById("root-layout-wrapper");
 /**
  * Fetch stock financial data from the backend API and generates financial tables
  * 
  * @param {string} symbol - Stock ticker symbol (e.g. "MSFT" for Microsoft) 
  */
 async function fetchStockFinancials(symbol){
+
+    //Loader
+    const loader = document.querySelector(".loader");
+
     try{
+
+        //Show the loader
+        loader.classList.remove("hidden");
 
         //Fetch financial data from the API
         const response = await fetch(`/api/alphaVantage/stock?symbol=${symbol}`);
         const data = await response.json();
+
         console.log(data);
+
+        //Check whether there is data inside data object or not
+        //There would usually be no data if the api has reached its limit
+        const isLimitReached = Object.values(data).every(
+            section => section?.Information && section.Information.includes("API key")
+        );
+
+        if(isLimitReached){
+            loader.classList.add("hidden");
+            window.alert("API rate limit reached. Please try again later.");
+            return;
+        }
+
+        //Hide the loader once data is fetched
+        loader.classList.add("hidden");
 
         //Remove everything from the root element before inserting
         root.innerHTML = "";
@@ -39,6 +62,8 @@ async function fetchStockFinancials(symbol){
         document.getElementById("balance-sheet-button").dispatchEvent(new Event("click"));
 
     }catch(error){
+        loader.classList.add("hidden");
+        window.alert(error.message);
         console.log(error);
     }
 }
