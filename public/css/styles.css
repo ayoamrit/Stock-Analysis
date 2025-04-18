@@ -58,6 +58,10 @@ a{
     cursor: pointer;
 }
 
+.hidden{
+    display: none;
+  }
+
 /* Nav Styles
 -----------------------------------------------------------*/
 nav{
@@ -195,13 +199,13 @@ main {
 -----------------------------------------------------------*/
 .buttons-container{
     width: 100%;
-    text-align: left;
+    display: flex;
+    justify-content: space-between;
     margin-top: 50px;
     margin-bottom: 10px;
 }
 
 .buttons-container button{
-    width: 20%;
     height: 30px;
     font-size: 1.4rem;
     padding: 5px 10px;
@@ -212,7 +216,16 @@ main {
     cursor: pointer;
 }
 
+.right-btn-wrapper button{
+    margin-right: 0;
+}
+
 .buttons-container button.active, .buttons-container button:hover{
+    background-color: var(--color-darkBlue-Gray);
+    color: var(--color-white);
+}
+
+.download-button-wrapper button:hover{
     background-color: var(--color-darkBlue-Gray);
     color: var(--color-white);
 }
@@ -232,7 +245,7 @@ main {
 
 .table-container {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     overflow-x: auto;
     background: var(--color-white);
 }

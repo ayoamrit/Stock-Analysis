@@ -1,4 +1,6 @@
 import {getTable, getCompanyHeader, getCompanyOverview, getButtons} from "./table.js";
+import { downloadTableData } from "./excel.js";
+
 
 /**
  * Nav GitHub link 
@@ -7,9 +9,9 @@ document.querySelector("nav").addEventListener("click", function() {
     window.open("https://github.com/ayoamrit/Stock-Analysis", "_blank");
 });
 
-
-
-const root = document.getElementById("root-layout-wrapper");
+let currentActiveButtonName = "";
+const root = document.getElementById("root");
+const rootWrapper = document.getElementById("root-layout-wrapper");
 /**
  * Fetch stock financial data from the backend API and generates financial tables
  * 
@@ -46,49 +48,81 @@ async function fetchStockFinancials(symbol){
         //Hide the loader once data is fetched
         loader.classList.add("hidden");
 
-        //Remove everything from the root element before inserting
-        root.innerHTML = "";
+        //Show the root if it's hidden
+        if(root.classList.contains("hidden")){
+            root.classList.remove("hidden");
+        }
 
+        //Remove everything from the root element before inserting
+        rootWrapper.innerHTML = "";
+
+        //Generate and append UI Sections
         const companyHeader = getCompanyHeader(data.overview);
         const companyOverview = getCompanyOverview(data.overview);
         const tableButtons = getButtons();
 
-        root.appendChild(companyHeader);
-        root.appendChild(companyOverview);
-        root.appendChild(tableButtons);
+        rootWrapper.appendChild(companyHeader);
+        rootWrapper.appendChild(companyOverview);
+        rootWrapper.appendChild(tableButtons);
 
+        //Attach listeners to the buttons for different financial reports
         attachButtonListener(data);
 
+        //Trigger click on the balance sheet button to show it by default
         document.getElementById("balance-sheet-button").dispatchEvent(new Event("click"));
 
+
+
     }catch(error){
+        //Hide loader and root if an error occurs
         loader.classList.add("hidden");
+        root.classList.add("hidden");
+
+        //Display error message
         window.alert(error.message);
         console.log(error);
     }
 }
 
 
+/**
+ * Attaches click listeners to the report type buttons (balance sheet, cash flow, income statement)
+ * @param {object} data - Object containing all financial data
+ *
+ */
 function attachButtonListener(data){
     const balanceSheetButton = document.getElementById("balance-sheet-button");
     const cashFlowStatementButton = document.getElementById("cash-flow-statement-button");
     const incomeStatementButton = document.getElementById("income-statement-button");
+    const downloadExcelButton = document.getElementById("download-xlsx-button");
 
+    //Add click listener to balance sheet button
     balanceSheetButton.addEventListener("click", () => {
         setActiveButton(balanceSheetButton);
+        currentActiveButtonName = "Balance Sheet";
         buttonAction(data.balanceSheet.annualReports, "balanceSheet");
     });
 
+    //Add click listener to cash flow button
     cashFlowStatementButton.addEventListener("click", () => {
         setActiveButton(cashFlowStatementButton);
+        currentActiveButtonName = "Cash Flow Statement";
         buttonAction(data.cashFlowStatement.annualReports, "cashFlowStatement");
     });
 
+    //Add click listener to income statement button
     incomeStatementButton.addEventListener("click", () => {
         setActiveButton(incomeStatementButton);
+        currentActiveButtonName = "Income Statement";
         buttonAction(data.incomeStatement.annualReports, "incomeStatement");
     });
+
+    //Add click listener to download excel button
+    downloadExcelButton.addEventListener("click", () => {
+        downloadTableData(document.querySelector("table"), currentActiveButtonName);
+    });
 }
+
 
 function setActiveButton(button){
     document.querySelectorAll(".buttons-container button").forEach(btn => {
@@ -97,22 +131,29 @@ function setActiveButton(button){
     button.classList.add("active");
 }
 
+
+/**
+ * Sets the clicked button as active and removes the 'active' class and others
+ * @param {HTMLElement} button - The button that was clicked 
+ */
 function buttonAction(report, reportType){
+    //Show alert if no data is available
     if(!report || report.length === 0){
         window.alert(`${report} data is missing or empty`);
         return;
     }
 
+    //Remove previous table if it exists
     const tableContainer = document.querySelector(".table-container");
 
     if(tableContainer){
-        root.removeChild(tableContainer);
+        rootWrapper.removeChild(tableContainer);
     }
 
+    //Generate and append the new table
     const table = getTable(report, reportType);
-    root.appendChild(table);
+    rootWrapper.appendChild(table);
 }
-
 
 /**
  * Event listener for the search button that fetches stock financial data.

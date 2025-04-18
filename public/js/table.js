@@ -98,6 +98,12 @@ export function getButtons(){
     const container = document.createElement("div");
     container.classList.add("buttons-container");
 
+    const leftWrapper = document.createElement("div");
+    leftWrapper.classList.add("left-btn-wrapper");
+
+    const rightWrapper = document.createElement("div");
+    rightWrapper.classList.add("right-btn-wrapper");
+
     //Balance Sheet Button
     const button_1 = document.createElement("button");
     button_1.classList.add("active");
@@ -114,10 +120,18 @@ export function getButtons(){
     button_3.setAttribute("id", "income-statement-button");
     button_3.textContent = "Income Statement";
 
+    //Download Button
+    const button_4 = document.createElement("button");
+    button_4.setAttribute("id", "download-xlsx-button");
+    button_4.textContent = "Download (.xlsx)";
 
-    container.appendChild(button_1);
-    container.appendChild(button_2);
-    container.appendChild(button_3);
+    leftWrapper.appendChild(button_1);
+    leftWrapper.appendChild(button_2);
+    leftWrapper.appendChild(button_3);
+    rightWrapper.appendChild(button_4);
+
+    container.appendChild(leftWrapper);
+    container.appendChild(rightWrapper);
 
     return container;
 }
@@ -297,11 +311,6 @@ const KEYS = {
         "Change In Receivables": "changeInReceivables"
     },
     incomeStatement: {
-        "Comprehensive Income Net of Tax": "comprehensiveIncomeNetOfTax",
-        "Cost of Revenue": "costOfRevenue",
-        "Cost of Goods & Services Sold": "costofGoodsAndServicesSold",
-        "Depreciation": "depreciation",
-        "Depreciation & Amortization": "depreciationAndAmortization",
         "EBIT": "ebit",
         "EBITDA": "ebitda",
         "Gross Profit": "grossProfit",
@@ -315,9 +324,3 @@ const KEYS = {
         "Total Revenue" : "totalRevenue"
     }
 }
-
-
-/**
- * Export Button
- * --------------------------------------------------------------------------
- */
