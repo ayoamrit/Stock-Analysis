@@ -1,5 +1,7 @@
 import {getTable, getCompanyHeader, getCompanyOverview, getButtons} from "./table.js";
 import { downloadTableData } from "./excel.js";
+import { getBalanceSheetChart } from "./charts.js";
+import {formatNumber} from "./utils.js";
 
 
 /**
@@ -8,6 +10,7 @@ import { downloadTableData } from "./excel.js";
 document.querySelector("nav").addEventListener("click", function() {
     window.open("https://github.com/ayoamrit/Stock-Analysis", "_blank");
 });
+
 
 let currentActiveButtonName = "";
 const root = document.getElementById("root");
@@ -71,7 +74,8 @@ async function fetchStockFinancials(symbol){
         //Trigger click on the balance sheet button to show it by default
         document.getElementById("balance-sheet-button").dispatchEvent(new Event("click"));
 
-
+        const chartData = getChartData(data);
+        rootWrapper.appendChild(getBalanceSheetChart(chartData.balanceSheetYears, chartData.totalAssets, chartData.totalLiabilities));
 
     }catch(error){
         //Hide loader and root if an error occurs
@@ -154,6 +158,23 @@ function buttonAction(report, reportType){
     const table = getTable(report, reportType);
     rootWrapper.appendChild(table);
 }
+
+
+function getChartData(data){
+    const balanceSheetReport = data.balanceSheet.annualReports;
+    const incomeStatementReport = data.incomeStatement.annualReports;
+    const cashFlowStatementReport = data.cashFlowStatement.annualReports;
+
+    const balanceSheetYears = 
+        balanceSheetReport.map(report => report.fiscalDateEnding.slice(0, 4))
+        .sort((a, b) => a - b);
+
+    const totalAssets = balanceSheetReport.map(report => formatNumber(report.totalAssets, false)).reverse();
+    const totalLiabilities = balanceSheetReport.map(report => formatNumber(report.totalLiabilities, false)).reverse();
+
+    return {balanceSheetYears, totalAssets, totalLiabilities};
+}
+
 
 /**
  * Event listener for the search button that fetches stock financial data.
