@@ -327,3 +327,26 @@ tbody th {
 .table-container::-webkit-scrollbar-track {
     background-color: #eee;
 }
+
+
+
+/* Chart Styles
+-----------------------------------------------------------*/
+.canvas-wrapper, .chart-buttons-container{
+    width: 100%;
+}
+
+.chart-buttons-container button{
+    height: 30px;
+    font-size: 1.4rem;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border: none;
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
+
+.chart-buttons-container button.active, .chart-buttons-container button:hover{
+    background-color: var(--color-darkBlue-Gray);
+    color: var(--color-white);
+}

@@ -30,20 +30,37 @@ async function fetchFinancialData(tickerSymbol, functionType){
     }
 }
 
+async function fetchTimeSeries(tickerSymbol){
+    try{
+        const url = `${BASE_URL}?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=${tickerSymbol}&apikey=${API_KEY}`;
+        const response = await fetch(url);
+
+        if(!response.ok){
+            throw new Error(`Failed to fetch "Time Series" data: ${response.statusText}`);
+        }
+
+        return await response.json();
+    }catch(error){
+        console.error(`Failed to fetch "Time Series" data:`, error);
+        return {error: error.message};
+    }
+}
+
 /**
  * Fetch all financial statements for a stock
  * @param {string} tickerSymbol - stock ticker symbol 
  * @returns {Promise<Object>} - All financial statements
  */
 async function getStockFinancials(tickerSymbol){
-    const [incomeStatement, balanceSheet, cashFlowStatement, overview] = await Promise.all([
+    const [timeSeries, incomeStatement, balanceSheet, cashFlowStatement, overview] = await Promise.all([
+        fetchTimeSeries(tickerSymbol),
         fetchFinancialData(tickerSymbol, "INCOME_STATEMENT"),
         fetchFinancialData(tickerSymbol, "BALANCE_SHEET"),
         fetchFinancialData(tickerSymbol, "CASH_FLOW"),
         fetchFinancialData(tickerSymbol, "OVERVIEW")
     ]);
 
-    return {incomeStatement, balanceSheet, cashFlowStatement, overview};
+    return {timeSeries, incomeStatement, balanceSheet, cashFlowStatement, overview};
 }
 
 export {getStockFinancials};

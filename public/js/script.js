@@ -1,5 +1,6 @@
 import {getTable, getCompanyHeader, getCompanyOverview, getButtons} from "./table.js";
 import { downloadTableData } from "./excel.js";
+import { createCanvasWrapper, createChart } from "./chart.js";
 
 
 /**
@@ -62,6 +63,8 @@ async function fetchStockFinancials(symbol){
         const tableButtons = getButtons();
 
         rootWrapper.appendChild(companyHeader);
+        rootWrapper.appendChild(createCanvasWrapper());
+        createChart(data.timeSeries);
         rootWrapper.appendChild(companyOverview);
         rootWrapper.appendChild(tableButtons);
 
