@@ -1,7 +1,5 @@
 import {getTable, getCompanyHeader, getCompanyOverview, getButtons} from "./table.js";
 import { downloadTableData } from "./excel.js";
-import { getBalanceSheetChart } from "./charts.js";
-import {formatNumber} from "./utils.js";
 import { createCanvasWrapper, createChart } from "./chart.js";
 
 
