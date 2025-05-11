@@ -55,7 +55,7 @@ function formatChartData(timeSeriesData) {
 
     entries.forEach(([date, values]) => {
         labels.push(date);
-        prices.push(parseFloat(values["4. close"]));
+        prices.push(parseFloat(values["5. adjusted close"]));
     });
 
     return [labels, prices];
