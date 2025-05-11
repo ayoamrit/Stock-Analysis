@@ -75,9 +75,6 @@ async function fetchStockFinancials(symbol){
         //Trigger click on the balance sheet button to show it by default
         document.getElementById("balance-sheet-button").dispatchEvent(new Event("click"));
 
-        const chartData = getChartData(data);
-        rootWrapper.appendChild(getBalanceSheetChart(chartData.balanceSheetYears, chartData.totalAssets, chartData.totalLiabilities));
-
     }catch(error){
         //Hide loader and root if an error occurs
         loader.classList.add("hidden");
@@ -158,22 +155,6 @@ function buttonAction(report, reportType){
     //Generate and append the new table
     const table = getTable(report, reportType);
     rootWrapper.appendChild(table);
-}
-
-
-function getChartData(data){
-    const balanceSheetReport = data.balanceSheet.annualReports;
-    const incomeStatementReport = data.incomeStatement.annualReports;
-    const cashFlowStatementReport = data.cashFlowStatement.annualReports;
-
-    const balanceSheetYears = 
-        balanceSheetReport.map(report => report.fiscalDateEnding.slice(0, 4))
-        .sort((a, b) => a - b);
-
-    const totalAssets = balanceSheetReport.map(report => formatNumber(report.totalAssets, false)).reverse();
-    const totalLiabilities = balanceSheetReport.map(report => formatNumber(report.totalLiabilities, false)).reverse();
-
-    return {balanceSheetYears, totalAssets, totalLiabilities};
 }
 
 

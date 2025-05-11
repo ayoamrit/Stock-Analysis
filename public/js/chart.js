@@ -38,6 +38,10 @@ function createButtons() {
     button_3.textContent = "Since Inception";
     button_3.classList.add("active");
 
+    container.appendChild(button_1);
+    container.appendChild(button_2);
+    container.appendChild(button_3);
+
 
     return container;
 }

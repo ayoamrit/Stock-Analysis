@@ -59,8 +59,11 @@ export function getCompanyOverview(companyData){
     const contentWrapper_2 = document.createElement("div");
     contentWrapper_2.classList.add("company-content-wrapper");
 
+    //Check whether the company offers dividend per share or not
+    let displayDividendYield = companyData.DividendYield === "None" ? "None" : (companyData.DividendYield * 100).toFixed(2) + "%";
+
     contentWrapper_2.appendChild(createContent('Dividend/Share', companyData.DividendPerShare));
-    contentWrapper_2.appendChild(createContent('Dividend Yield', companyData.DividendYield));
+    contentWrapper_2.appendChild(createContent('Dividend Yield', displayDividendYield));
     contentWrapper_2.appendChild(createContent('EPS', companyData.EPS));
     contentWrapper_2.appendChild(createContent('Revenue/Share', companyData.RevenuePerShareTTM));
 
@@ -68,10 +71,10 @@ export function getCompanyOverview(companyData){
     const contentWrapper_3 = document.createElement("div");
     contentWrapper_3.classList.add("company-content-wrapper");
 
-    contentWrapper_3.appendChild(createContent('Profit Margin', companyData.ProfitMargin));
-    contentWrapper_3.appendChild(createContent('Operating Margin', companyData.OperatingMarginTTM));
-    contentWrapper_3.appendChild(createContent('ROA', companyData.ReturnOnAssetsTTM));
-    contentWrapper_3.appendChild(createContent('ROE', companyData.ReturnOnEquityTTM));
+    contentWrapper_3.appendChild(createContent('Profit Margin', `${(companyData.ProfitMargin * 100).toFixed(2)}%`));
+    contentWrapper_3.appendChild(createContent('Operating Margin', `${(companyData.OperatingMarginTTM * 100).toFixed(2)}%`));
+    contentWrapper_3.appendChild(createContent('ROA', `${(companyData.ReturnOnAssetsTTM * 100).toFixed(2)}%`));
+    contentWrapper_3.appendChild(createContent('ROE', `${(companyData.ReturnOnEquityTTM * 100).toFixed(2)}%`));
 
     //3rd Wrapper
     const contentWrapper_4 = document.createElement("div");
